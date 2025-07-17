@@ -445,59 +445,10 @@ print(f"P_Value of Mann-Whitney U test for EDA Free: {mannwhitney_eda.pvalue}")
 # print(f"P_Value of Mann-Whitney U test for PPG Free: {mannwhitney_ppg.pvalue}")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from scipy import stats
-
-# =============================================
-# DATA PREPARATION
-# =============================================
-# Assuming:
-# experimental_group_eda = list of all EDA values (flattened) for experimental group
-# control_group_eda = list of all EDA values (flattened) for control group
-
-# Calculate statistics
-exp_mean, exp_std = np.mean(experimental_group_eda), np.std(experimental_group_eda)
-ctrl_mean, ctrl_std = np.mean(control_group_eda), np.std(control_group_eda)
-
-# Perform statistical test (Mann-Whitney for non-normal data)
-stat, p_value = stats.mannwhitneyu(experimental_group_eda, control_group_eda)
-
 # =============================================
 # VISUALIZATION
 # =============================================
+
 plt.figure(figsize=(8, 6), dpi=100)  # High resolution for publications
 
 # Create bar plot with error bars
