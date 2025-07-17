@@ -1,37 +1,72 @@
 import pandas as pd
 import numpy as np
 
-# -------------------------------- Description of the Project --------------------------------#
-'''
-1. Calculate how many missions each student completed 
-2. Calculate how many tasks each student completed 
-3. Calculate each student's total time to finish each mission 
-4. Calculate the total number of errors for each student 
-5. Calculate the total number of skips for each student
-6. Mission Completion Time: o Formula: Mission Completion Time = missionFinished - missionStartedAt 
-This metric provides the total time taken by a student to complete a mission. 
-7. Task Completion Time: o Formula: Task Completion Time = taskFinishedAt - taskStartedAt 
-This metric provides the time taken by a student to complete a specific task within a mission. 
-8. Average Task Completion Time: o Formula: Average Task Completion Time = Σ(Task Completion Time) / Number of Tasks 
-This metric provides the average time taken to complete tasks within a mission. 
-9. Performance Score: o Formula: Performance Score = 100 - (skips + mistakes) / (Total Tasks) * 100 
-This metric combines the number of skips and mistakes to calculate a performance score. The lower the score, the better the performance. 
-10. Efficiency Index: o Formula: Efficiency Index = 1 / (1 + (skips + mistakes) / (Total Tasks)) 
-This metric provides an efficiency index, where higher values indicate better efficiency by considering skips and mistakes. 
-11. Task Completion Rate: o Formula: Task Completion Rate = (Total Tasks - skips) / Total Tasks * 100 
-This metric calculates the percentage of tasks completed, considering skips. 
-12. Mistake Rate: o Formula: Mistake Rate = mistakes / (Total Tasks - skips) * 100
+# ------------------------------------------------------------------------------------------
+# Project Description: Student Performance Analysis in Experimental Conditions
+# ------------------------------------------------------------------------------------------
 
-a few comments about the data processing:
+"""
+This project analyzes student interaction data collected under two experimental conditions:
+1. "autonomy-and-competence"
+2. "free"
 
-It is necessary to separate students from each course (i.e., "autonomy-and-competence" and "free"), following the two datasets that I sent you.
-This is necessary because we will be comparing students from these two courses, and we need the data analysis software to understand this in some way.
-for instance, define the courses as -1 (for students in the course “free”) and 1 (for students in the course “autonomy-and-competence”).
-"TaskCompletionTime", "MissionCompletionTime", and  "AverageTaskCompletionTime" should be in seconds (e.g., 1480 seconds). 
-This is because analyses such as mean comparison and regression do not understand values such as date and time, requesting a pure numerical variable (e.g., average or total).
-If "TaskCompletionRate" and "MistakeRate" are percentages, they need to be represented in values between 0 and 1. For example, 0.9 instead of 90 or 0.97 instead of 97.
-Always calculate values of this type with 3 decimal places.
-'''
+Each student belongs to one of these experimental groups. For comparison purposes, group labels are encoded as:
+    - "free" group                   → -1
+    - "autonomy-and-competence" group → 1
+
+The following metrics are computed for each student:
+
+1. **Missions Completed**:
+   - Total number of missions completed by the student.
+
+2. **Tasks Completed**:
+   - Total number of tasks completed by the student.
+
+3. **Mission Completion Time**:
+   - Formula: `missionFinishedAt - missionStartedAt`
+   - Total time in **seconds** taken to complete each mission.
+
+4. **Task Completion Time**:
+   - Formula: `taskFinishedAt - taskStartedAt`
+   - Time in **seconds** taken to complete each individual task.
+
+5. **Average Task Completion Time**:
+   - Formula: `Σ(Task Completion Time) / Number of Tasks`
+   - Mean time in **seconds** per task.
+
+6. **Total Errors**:
+   - Total number of mistakes made by the student.
+
+7. **Total Skips**:
+   - Total number of tasks skipped by the student.
+
+8. **Performance Score**:
+   - Formula: `100 - ((skips + mistakes) / Total Tasks) * 100`
+   - A percentage score where **lower values indicate better performance**.
+   - Calculated with **three decimal places**.
+
+9. **Efficiency Index**:
+   - Formula: `1 / (1 + ((skips + mistakes) / Total Tasks))`
+   - A normalized index where **higher values indicate greater efficiency**.
+
+10. **Task Completion Rate**:
+    - Formula: `(Total Tasks - skips) / Total Tasks`
+    - A proportion between 0 and 1, representing the percentage of completed tasks.
+    - Calculated with **three decimal places**.
+
+11. **Mistake Rate**:
+    - Formula: `mistakes / (Total Tasks - skips)`
+    - A proportion between 0 and 1, indicating the error rate for completed tasks.
+    - Calculated with **three decimal places**.
+
+### Notes on Data Processing:
+
+- Students must be **categorized by experimental group** (`-1` or `1`) for accurate comparisons.
+- All time-based metrics (`TaskCompletionTime`, `MissionCompletionTime`, `AverageTaskCompletionTime`) must be converted to **numerical seconds**.
+- Rates and percentages (e.g., `TaskCompletionRate`, `MistakeRate`) must be stored as **floating-point values between 0 and 1**, rounded to **three decimal places**.
+
+"""
+
 
 
 # -------------------------  Mission Completion Time ----------------------------#
