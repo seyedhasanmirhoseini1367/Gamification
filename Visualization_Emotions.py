@@ -1,10 +1,5 @@
 
-'''
-Read the Files: loop through the files in each folder and read their contents.
-Count the Emotions: For each file, we'll count the occurrences of each emotion.
-Create a DataFrame: compile the counts into a DataFrame with emotions as columns and test taker IDs as rows.
-Save the DataFrame: Finally, save the DataFrame as a CSV file.
-'''
+
 
 import pandas as pd
 import os
